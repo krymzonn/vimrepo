@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/kris/svn/dev/webapp/trunk/static/styles'
+let g:netrw_dirhist_2='/home/kris/.config/awesome'
+let g:netrw_dirhist_3='/usr/lib/pymodules/python2.6/django/db/backends/postgresql_psycopg2'
