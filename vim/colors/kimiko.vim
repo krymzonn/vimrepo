@@ -60,6 +60,8 @@ hi PreProc              cterm=bold ctermfg=141
 hi Include              cterm=bold ctermfg=147
 hi Define               cterm=bold ctermfg=129
 
+hi MatchParen           ctermbg=22
+
 " keyword completion menu
 hi Pmenu                ctermfg=255 ctermbg=236
 hi PmenuSel             ctermfg=255 ctermbg=22
