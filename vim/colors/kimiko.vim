@@ -20,8 +20,11 @@ hi Constant            ctermfg=121              " 'contstants', or integers plac
 hi String              ctermfg=219
 hi Number              ctermfg=147
 
-hi LineNr              ctermfg=188 ctermbg=24   " foreground and background of line numbers
-hi StatusLine          ctermfg=24 ctermbg=188   " line at bottom of screen with filename, cursor position, etc...
+hi LineNr              ctermfg=250 ctermbg=237
+hi StatusLine          cterm=bold ctermfg=223 ctermbg=237   " line at bottom of screen with filename, cursor position, etc...
+hi StatusLineNC        cterm=bold ctermfg=247 ctermbg=237   " line at bottom of screen with filename, cursor position, etc...
+hi ModeMsg             ctermbg=237
+hi MoreMsg             ctermbg=237
 
 hi Statement           cterm=bold ctermfg=221
 hi pythonStatement     cterm=bold ctermfg=226   " stand out
@@ -38,7 +41,7 @@ hi Special             ctermfg=197              "
 
 hi Title               cterm=bold,underline ctermfg=211              "
 hi htmlH1              cterm=bold ctermfg=211
-hi htmlH2              cterm=bold ctermfg=223
+hi htmlH2              cterm=bold ctermfg=224
 hi htmlH3              cterm=bold,underline ctermfg=255
 hi htmlH4              cterm=bold,underline  ctermfg=250
 hi htmlH5              cterm=bold ctermfg=250
@@ -49,6 +52,7 @@ hi htmlH6              ctermfg=252
 hi Type                ctermfg=83              " any variable or characters being assigned a value, ex: style=, height=, etc...
 
 hi Visual              ctermbg=23  "ctermfg=232 ctermbg=153
+hi MatchParen           ctermbg=22
 
 hi Search               ctermbg=24 ctermfg=white
 hi IncSearch            cterm=NONE ctermfg=89 ctermbg=118
@@ -60,7 +64,6 @@ hi PreProc              cterm=bold ctermfg=141
 hi Include              cterm=bold ctermfg=147
 hi Define               cterm=bold ctermfg=129
 
-hi MatchParen           ctermbg=22
 
 " keyword completion menu
 hi Pmenu                ctermfg=255 ctermbg=236
