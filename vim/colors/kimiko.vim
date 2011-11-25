@@ -14,6 +14,9 @@ hi CursorColumn        ctermbg=234
 
 hi Normal              ctermfg=191              " DEFAULT font color that will be used on all non-special characters
 
+hi NonText             ctermfg=67
+hi SpecialKey          ctermfg=67
+
 hi Comment             ctermfg=152              " lines that have been commented out
 
 hi Constant            ctermfg=121              " 'contstants', or integers placed outside of a string
@@ -25,6 +28,11 @@ hi StatusLine          cterm=bold ctermfg=223 ctermbg=237   " line at bottom of 
 hi StatusLineNC        cterm=bold ctermfg=247 ctermbg=237   " line at bottom of screen with filename, cursor position, etc...
 hi ModeMsg             ctermbg=237
 hi MoreMsg             ctermbg=237
+hi VertSplit           cterm=bold ctermfg=242 ctermbg=237   " line at bottom of screen with filename, cursor position, etc...
+
+hi TabLine             cterm=bold,underline ctermfg=253  ctermbg=239
+hi TabLineSel          cterm=bold,underline ctermfg=253  ctermbg=29
+hi TabLineFill         cterm=bold,underline ctermfg=253  ctermbg=239
 
 hi Statement           cterm=bold ctermfg=221
 hi pythonStatement     cterm=bold ctermfg=226   " stand out

@@ -77,15 +77,14 @@ set autowrite           " Automatically save before commands like :next and :mak
 set hidden             " Hide buffers when they are abandoned
 
 
-
 "   ===  Python  ===
 " some from http://www.vex.net/~x/python_and_vim.html
-set expandtab
+"set expandtab
 set textwidth=79
-set tabstop=8
-set softtabstop=4
-set smarttab
-set shiftwidth=4
+"set tabstop=8
+"set softtabstop=4
+"set smarttab
+"set shiftwidth=4
 set autoindent
 let python_highlight_all = 1 " mainly space_error
 "Trim Trailing Whitespace
@@ -110,10 +109,9 @@ set ruler
 set hlsearch
 set incsearch
 
-set listchars=tab:>-,trail:·,eol:$
+set list
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 nmap <silent> <leader>s :set nolist!<CR> "show white with " s"
-
-"set visualbell
 
 
 "cont from http://sontek.net/turning-vim-into-a-modern-python-ide
