@@ -5,7 +5,7 @@ call pathogen#helptags()
 
 
 syntax on
-"set background=dark
+set background=dark
 "colorscheme koehler
 colorscheme kimiko
 
@@ -68,6 +68,7 @@ set statusline+=\ %P "percent through file
 set laststatus=2
 "-----------------
 
+set showmode
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set ignorecase          " Do case insensitive matching
@@ -76,15 +77,18 @@ set incsearch           " Incremental search
 set autowrite           " Automatically save before commands like :next and :make
 set hidden             " Hide buffers when they are abandoned
 
+"set guioptions-=TmrL
+"set guioptions = agit
+set guioptions = ai
 
 "   ===  Python  ===
 " some from http://www.vex.net/~x/python_and_vim.html
-"set expandtab
 set textwidth=79
-"set tabstop=8
-"set softtabstop=4
-"set smarttab
-"set shiftwidth=4
+set expandtab
+set tabstop=8
+set softtabstop=4
+set smarttab
+set shiftwidth=4
 set autoindent
 let python_highlight_all = 1 " mainly space_error
 "Trim Trailing Whitespace
@@ -99,7 +103,12 @@ let mapleader = " "
 set history=1000
 runtime macros/matchit.vim
 set wildmenu
-set wildmode=list:longest
+" From http://stripey.com/vim/vimrc.html
+" have command-line completion <Tab> (for filenames, help topics, option
+" names)
+" first list the available options and complete the longest common part, then
+" have further <Tab>s cycle through the possibilities:
+set wildmode=list:longest,full
 
 set ignorecase 
 set smartcase

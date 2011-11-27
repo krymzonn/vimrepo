@@ -12,7 +12,7 @@ set cursorcolumn
 hi CursorLine          cterm=NONE ctermbg=233
 hi CursorColumn        ctermbg=234
 
-hi Normal              ctermfg=191              " DEFAULT font color that will be used on all non-special characters
+hi Normal              ctermfg=191 guibg=black guifg=#E7FFA0  " DEFAULT
 
 hi NonText             ctermfg=67
 hi SpecialKey          ctermfg=67
