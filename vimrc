@@ -135,6 +135,13 @@ nmap <silent> <leader>s :set nolist!<CR> "show white with " s"
 set foldmethod=indent
 set foldlevel=99
 
+"window movement
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+
 map <leader>td <Plug>TaskList
 map <leader>g :GundoToggle<CR>
 let g:pep8_map='<leader>8'
