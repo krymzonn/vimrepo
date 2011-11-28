@@ -68,6 +68,8 @@ set statusline+=\ %P "percent through file
 set laststatus=2
 "-----------------
 
+set virtualedit=all
+
 set showmode
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
