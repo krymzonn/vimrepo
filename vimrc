@@ -95,6 +95,12 @@ let python_highlight_all = 1 " mainly space_error
 "doesn't work?
 "autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
+if has("autocmd")
+  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+endif
+
 
 "http://items.sjbach.com/319/configuring-vim-right
 nnoremap ' `
