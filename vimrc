@@ -1,8 +1,8 @@
+set nocompatible
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-set nocompatible
 syntax on
 set background=dark
 "colorscheme koehler
@@ -37,7 +37,7 @@ set guioptions = ai
 
 "   ===  Python  ===
 " some from http://www.vex.net/~x/python_and_vim.html
-set textwidth=79
+set textwidth=80
 set expandtab
 set tabstop=8
 set softtabstop=4
@@ -61,8 +61,10 @@ nnoremap ' `
 nnoremap ` '
 let mapleader = " "
 set history=1000
-runtime macros/matchit.vim
+runtime macros/matchit.vim "runtime like source rel to the Vim installation dir
 set wildmenu
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp "swap files
 " From http://stripey.com/vim/vimrc.html
 " have command-line completion <Tab> (for filenames, help topics, option
 " names)
@@ -74,7 +76,7 @@ set wildignore=*.o,*.obj,*~,*.pyc "stuff to ignore when tab completing
 set ignorecase 
 set smartcase
 set title
-set scrolloff=3 "to reconsider
+set scrolloff=5
 set ruler
 set hlsearch
 set incsearch
@@ -294,9 +296,8 @@ endfunction
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 
-"make <c-l> clear the highlight as well as redraw
-nnoremap <C-L> :nohls<CR><C-L>
-inoremap <C-L> <C-O>:nohls<CR>
+"clear the highlight as well as redraw
+nnoremap <leader>n :nohls<CR><C-L>
 "make Y consistent with C and D
 nnoremap Y y$
 "spell check when writing commit logs
@@ -310,5 +311,48 @@ autocmd BufReadPost fugitive://*
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \ nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
+
+" https://github.com/derekwyatt/vim-config/
+" Printing options
+set printoptions=header:0,duplex:long,paper:a4
+" set the forward slash to be the slash of note. Backslashes suck
+set shellslash
+if has("unix")
+    set shell=bash
+else
+    set shell=ksh.exe
+endif
+" Make command line two lines high
+set ch=2
+" Allow backspacing over indent, eol, and the start of an insert
+set backspace=2
+" Make the 'cw' u like commands put a $ at the end instead of just deleting
+" the text and replacing it
+set cpoptions+=$
+" Set up the gui cursor to look nice
+"set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
+" When completing by tag, show the whole tag, not just the function name
+set showfulltag
+" get rid of the silly characters in separators
+set fillchars = ""
+
+" Automatically read a file that has changed on disk
+set autoread
+
+" Toggle paste mode
+nmap <silent><leader>p :set invpaste<CR>:set paste?<CR>
+"(...)
+" Underline the current line with '='
+nmap <silent><leader>ul :t.\|s/./=/g\|:nohls<cr>
+" Shrink the current window to fit the number of lines in the buffer. Useful
+" for those buffers that are only a few lines
+nmap <silent><leader>sw :execute ":resize " . line('$')<cr>
+" Use the bufkill plugin to eliminate a buffer but keep the window layout
+nmap <leader>bd :BD<cr>
+" Alright... let's try this out
+imap jj <esc>
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=2048
 
 
