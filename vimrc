@@ -2,8 +2,7 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-
-
+set nocompatible
 syntax on
 set background=dark
 "colorscheme koehler
@@ -173,7 +172,9 @@ set statusline+=%{&paste?'[paste]':''}
 set statusline+=%*
 
 set statusline+=%= "left/right separator
+"set statusline+=%#Comment#
 set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+"set statusline+=%*
 set statusline+=%c, "cursor column
 set statusline+=%l/%L "cursor line/total lines
 set statusline+=\ %P "percent through file
@@ -292,5 +293,22 @@ endfunction
 "syntastic settings
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+
+"make <c-l> clear the highlight as well as redraw
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
+"make Y consistent with C and D
+nnoremap Y y$
+"spell check when writing commit logs
+autocmd filetype svn,*commit* setlocal spell
+"http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
+"hacks from above (the url, not jesus) to delete fugitive buffers when we
+"leave them - otherwise the buffer list gets poluted
+"add a mapping on .. to view parent tree
+autocmd BufReadPost fugitive://* set bufhidden=delete
+autocmd BufReadPost fugitive://*
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \ nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
 
 
