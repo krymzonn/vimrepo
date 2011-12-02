@@ -52,3 +52,6 @@
 [submodule "vim/bundle/bufkill"]
 	path = vim/bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim
+[submodule "vim/bundle/ikiwiki"]
+	path = vim/bundle/ikiwiki
+	url = http://git.devnull.li/ikiwiki-syntax.git
