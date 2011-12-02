@@ -20,6 +20,9 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
+" disable MiniBufExpl
+let loaded_minibufexplorer = 1
+
 set virtualedit=all
 
 set showmode
