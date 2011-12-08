@@ -52,6 +52,6 @@
 [submodule "vim/bundle/ikiwiki"]
 	path = vim/bundle/ikiwiki
 	url = http://git.devnull.li/ikiwiki-syntax.git
-[submodule "vim-pep8"]
-	path = vim-pep8
+[submodule "vim/bundle/pep8"]
+	path = vim/bundle/pep8
 	url = git://github.com/jbking/vim-pep8.git
