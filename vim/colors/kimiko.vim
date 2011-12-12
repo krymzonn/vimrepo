@@ -9,8 +9,9 @@ let g:colors_name = "kimiko"
 set cursorline
 set cursorcolumn
 "hi Cursor              cterm=inverse
-hi CursorLine          cterm=NONE ctermbg=233
-hi CursorColumn        ctermbg=234
+hi CursorLine          cterm=NONE ctermbg=234
+hi CursorColumn        ctermbg=235
+hi ColorColumn         ctermbg=232
 
 hi Normal              ctermfg=191 guibg=black guifg=#E7FFA0  " DEFAULT
 
