@@ -20,6 +20,10 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
+" Macros
+" django model->modelAdmin. start line above
+let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls."0pa, "0paAdmin)'
+
 " disable MiniBufExpl
 let loaded_minibufexplorer = 1
 
@@ -296,7 +300,7 @@ function! s:Median(nums)
 endfunction
 
 "syntastic settings
-let g:syntastic_enable_signs=1
+let g:syntastic_enable_signs=0 "takes pre columns
 let g:syntastic_auto_loc_list=2
 
 "clear the highlight as well as redraw
