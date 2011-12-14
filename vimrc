@@ -29,25 +29,37 @@ let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls.
 command Md2tei call Md2tei()
 function Md2tei()
 
-    normal Go# 
+    " paragraph wrapping
     g/^\w/normal vapkS<p>
 
+    " establish helper hash for proper nesting
+    normal Go# 
+    " section nesting
     g/^#\{4}\s/normal V/^#\{1,4}\skS<div>
     g/^#\{3}\s/normal V/^#\{1,3}\skS<div>
     g/^#\{2}\s/normal V/^#\{1,2}\skS<div>
+    " remove helper hash
+    normal G dd
 
-    g/##/normal nwy$O^[^C@@midstep@@^["0pVu
+    " generate internal link targets
+    " this can be overly complicated
+    " as I had confusing binding conflicts
+    g/##/normal nwy$O0C@@midstep@@"0pVu
     g/@@midstep@@/s/\s/-/g
-    g/@@midstep@@/normal 0i<div xml:id="k dd A">
+    g/@@midstep@@/normal 0i<div xml:id="kddA">
     %s/@@midstep@@//
+    " wrap section titles
     %s/#\{2,5}\s\+\(.\+\)/<head>\1<\/head>
 
     set filetype=xml
-    normal gg jj G =
+    " reformat
+    normal gg jj v G = dd
 
+    " highlights - warning, misses line-spanning ones
     %s/\*\*\([^*]\+\)\*\*/<hi rend="HINT">\1<\/hi>/g
     %s/\*\([^*]\+\)\*/<hi>\1<\/hi>/g
 
+    " internal links - warning as above, + spaces in targets
     %s/_\([^_]\+\)_/<ptr target="#\L\1\E"\/>/g
 
 endfunction
