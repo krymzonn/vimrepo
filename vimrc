@@ -24,6 +24,35 @@ endif
 " django model->modelAdmin. start line above
 let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls."0pa, "0paAdmin)'
 
+
+
+command Md2tei call Md2tei()
+function Md2tei()
+
+    normal Go# 
+    g/^\w/normal vapkS<p>
+
+    g/^#\{4}\s/normal V/^#\{1,4}\skS<div>
+    g/^#\{3}\s/normal V/^#\{1,3}\skS<div>
+    g/^#\{2}\s/normal V/^#\{1,2}\skS<div>
+
+    g/##/normal nwy$O^[^C@@midstep@@^["0pVu
+    g/@@midstep@@/s/\s/-/g
+    g/@@midstep@@/normal 0i<div xml:id="k dd A">
+    %s/@@midstep@@//
+    %s/#\{2,5}\s\+\(.\+\)/<head>\1<\/head>
+
+    set filetype=xml
+    normal gg jj G =
+
+    %s/\*\*\([^*]\+\)\*\*/<hi rend="HINT">\1<\/hi>/g
+    %s/\*\([^*]\+\)\*/<hi>\1<\/hi>/g
+
+    %s/_\([^_]\+\)_/<ptr target="#\L\1\E"\/>/g
+
+endfunction
+
+
 " disable MiniBufExpl
 let loaded_minibufexplorer = 1
 
@@ -111,10 +140,10 @@ au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 " NerdTree
-map <leader>n :NERDTreeToggle<CR>
+map <leader>nerd :NERDTreeToggle<CR>
 " Rope
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
+map <leader>roj :RopeGotoDefinition<CR>
+map <leader>ror :RopeRename<CR>
 " Ack
 nmap <leader>a <Esc>:Ack!
 " MakeGreen
