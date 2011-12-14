@@ -51,9 +51,18 @@ function Md2tei()
     " wrap section titles
     %s/#\{2,5}\s\+\(.\+\)/<head>\1<\/head>
 
+    " title, yanked into "t
+    normal gg/^#\sxx"ty$yss<head>
+    normal 0V/<divkS<div>
+
+    normal nO</front><body>
+    normal Go</body>
+    normal gg/<divO<front>
+    "normal ggO<front>
+
     set filetype=xml
     " reformat
-    normal gg jj v G = dd
+    normal gg v G =
 
     " highlights - warning, misses line-spanning ones
     %s/\*\*\([^*]\+\)\*\*/<hi rend="HINT">\1<\/hi>/g
@@ -64,6 +73,13 @@ function Md2tei()
 
 endfunction
 
+command TeiWrap call TeiWrap()
+function TeiWrap()
+    normal gg
+    read doc/xmlstub.xml
+    normal Go</text></TEI>
+    normal gg v G =
+endfunction
 
 " disable MiniBufExpl
 let loaded_minibufexplorer = 1
