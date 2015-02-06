@@ -55,3 +55,6 @@
 [submodule "vim/bundle/pep8"]
 	path = vim/bundle/pep8
 	url = git://github.com/vim-scripts/pep8.git
+[submodule "vim/bundle/ropevim"]
+	path = vim/bundle/ropevim
+	url = https://github.com/python-rope/ropevim.git

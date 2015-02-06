@@ -25,7 +25,6 @@ endif
 let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls."0pa, "0paAdmin)'
 
 
-
 command Md2tei call Md2tei()
 function Md2tei()
 
@@ -164,7 +163,8 @@ map <leader>td <Plug>TaskList
 map <leader>g :GundoToggle<CR>
 let g:pep8_map='<leader>8'
 " SuperTab
-au FileType python set omnifunc=pythoncomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 " NerdTree
@@ -172,6 +172,10 @@ map <leader>nerd :NERDTreeToggle<CR>
 " Rope
 map <leader>roj :RopeGotoDefinition<CR>
 map <leader>ror :RopeRename<CR>
+" more rope
+let ropevim_vim_completion=1
+let ropevim_extended_complete=1
+autocmd FileType python setlocal omnifunc=RopeCompleteFunc
 " Ack
 nmap <leader>a <Esc>:Ack!
 " MakeGreen
