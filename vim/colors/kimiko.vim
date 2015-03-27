@@ -92,6 +92,13 @@ hi link diffFile        htmlH2
 "broken hi link diffOldFile     diffRemoved
 "broken hi link diffNewFile     diffAdded
 
+" syntastic default,
+" http://stackoverflow.com/questions/17677441/changing-error-highlight-color-used-by-syntastic
+hi link SyntasticError SpellBad
+hi link SyntasticWarning SpellCap
+hi SpellBad             ctermbg=52
+hi SpellCap             ctermbg=54
+
 
 " Directory
 " ModeMsg

@@ -3,6 +3,9 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+" GNU screen apparently needs this for colours
+set t_Co=256
+
 syntax on
 set background=dark
 "colorscheme koehler
@@ -83,7 +86,7 @@ endfunction
 " disable MiniBufExpl
 let loaded_minibufexplorer = 1
 
-set virtualedit=all
+"set virtualedit=all
 
 set showmode
 set showcmd             " Show (partial) command in status line.
@@ -176,6 +179,8 @@ map <leader>ror :RopeRename<CR>
 let ropevim_vim_completion=1
 let ropevim_extended_complete=1
 autocmd FileType python setlocal omnifunc=RopeCompleteFunc
+" autoclose the PyDoc from omnicompletion
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " Ack
 nmap <leader>a <Esc>:Ack!
 " MakeGreen
