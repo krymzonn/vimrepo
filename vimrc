@@ -101,9 +101,14 @@ set hidden             " Hide buffers when they are abandoned
 "set guioptions = agit
 set guioptions = ai
 
+" Markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'sh', 'yaml']
+let g:markdown_minlines = 100
+
 "   ===  Python  ===
 " some from http://www.vex.net/~x/python_and_vim.html
-set textwidth=80
+"set textwidth=80
 set expandtab
 set tabstop=8
 set softtabstop=4
