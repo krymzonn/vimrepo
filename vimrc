@@ -144,7 +144,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp "swap files
 set wildmode=list:longest,full
 set wildignore=*.o,*.obj,*~,*.pyc "stuff to ignore when tab completing
 
-set ignorecase 
+"set ignorecase
 set smartcase
 set title
 set scrolloff=5
@@ -237,9 +237,9 @@ set statusline+=%{StatuslineTrailingSpaceWarning()}
 
 set statusline+=%{StatuslineLongLineWarning()}
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -371,8 +371,12 @@ function! s:Median(nums)
 endfunction
 
 "syntastic settings
-let g:syntastic_enable_signs=0 "takes pre columns
-let g:syntastic_auto_loc_list=2
+"let g:syntastic_enable_signs=0 "takes pre columns
+"let g:syntastic_auto_loc_list=2
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "clear the highlight as well as redraw
 nnoremap <leader>n :nohls<CR><C-L>
