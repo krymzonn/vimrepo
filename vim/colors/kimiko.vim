@@ -87,10 +87,16 @@ hi link htmlTag         htmlTagName
 hi link htmlEndTag      htmlSpecialTagName
 hi link htmlItalic      htmlUnderline
 
+hi link markdownCode Number
+
 hi link diffAdded       Type "type is green
 hi link diffFile        htmlH2
 "broken hi link diffOldFile     diffRemoved
 "broken hi link diffNewFile     diffAdded
+hi DiffAdd               ctermbg=22
+hi DiffDelete            ctermbg=239 ctermfg=52
+hi DiffChange            ctermbg=237
+hi DiffText              ctermbg=53
 
 " syntastic default,
 " http://stackoverflow.com/questions/17677441/changing-error-highlight-color-used-by-syntastic

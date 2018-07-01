@@ -26,6 +26,9 @@ endif
 " Macros
 " django model->modelAdmin. start line above
 let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls."0pa, "0paAdmin)'
+" awscli space separated -> credentials + config
+let @r='0dt.r[Ea]ld2wiaws_access_key_id = Eldwiaws_secret_access_key = oj'
+let @o='/[aprofile jdjOoutput = jsonregion = eu-central-1'
 
 
 command Md2tei call Md2tei()
@@ -377,6 +380,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" Python 3.newer
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+"let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
+let g:syntastic_python_pyflakes_exe = '~/.local/bin/pyflakes'
+let g:syntastic_python_flake8_exe = '~/.local/bin/flake8'
+let g:syntastic_python_checkers = ['flake8']
 
 "clear the highlight as well as redraw
 nnoremap <leader>n :nohls<CR><C-L>
