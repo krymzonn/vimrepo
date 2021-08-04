@@ -1,14 +1,35 @@
-set nocompatible
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call plug#begin('~/.vim/plugged')
+
+Plug 'https://github.com/tpope/vim-sensible'
+" Indents
+Plug 'https://github.com/tpope/vim-sleuth'
+
+
+" Previously installed
+Plug 'https://github.com/mileszs/ack.vim.git'
+Plug 'https://github.com/qpkorr/vim-bufkill.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/wincent/Command-T.git'
+Plug 'sjl/gundo.vim'
+Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'tpope/vim-rhubarb'
+Plug 'AndrewRadev/splitjoin.vim'
+
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+call plug#end()
+
+
+#set nocompatible
+#filetype off
+#call pathogen#runtime_append_all_bundles()
+#call pathogen#helptags()
 
 " GNU screen apparently needs this for colours
 set t_Co=256
 
-syntax on
+#syntax on
 set background=dark
-"colorscheme koehler
 colorscheme kimiko
 
 " Uncomment the following to have Vim jump to the last position when
@@ -17,74 +38,78 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
+"syntastic settings
+"let g:syntastic_enable_signs=0 "takes pre columns
+"let g:syntastic_auto_loc_list=2
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" Python 3.newer
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+"let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
+let g:syntastic_python_pyflakes_exe = '~/.local/bin/pyflakes'
+let g:syntastic_python_flake8_exe = '~/.local/bin/flake8'
+let g:syntastic_python_checkers = ['flake8']
+
+"clear the highlight as well as redraw
+nnoremap <leader>n :nohls<CR><C-L>
+"make Y consistent with C and D
+nnoremap Y y$
+"spell check when writing commit logs
+autocmd filetype svn,*commit* setlocal spell
+"http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
+"hacks from above (the url, not jesus) to delete fugitive buffers when we
+"leave them - otherwise the buffer list gets poluted
+"add a mapping on .. to view parent tree
+autocmd BufReadPost fugitive://* set bufhidden=delete
+autocmd BufReadPost fugitive://*
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \ nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
+
+" https://github.com/derekwyatt/vim-config/
+" Printing options
+set printoptions=header:0,duplex:long,paper:a4
+" set the forward slash to be the slash of note. Backslashes suck
+set shellslash
+if has("unix")
+    set shell=bash
+else
+    set shell=ksh.exe
 endif
+" Make command line two lines high
+set ch=2
+" Allow backspacing over indent, eol, and the start of an insert
+set backspace=2
+" Make the 'cw' u like commands put a $ at the end instead of just deleting
+" the text and replacing it
+set cpoptions+=$
+" Set up the gui cursor to look nice
+"set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
-" Macros
-" django model->modelAdmin. start line above
-let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls."0pa, "0paAdmin)'
-" awscli space separated -> credentials + config
-let @r='0dt.r[Ea]ld2wiaws_access_key_id = Eldwiaws_secret_access_key = oj'
-let @o='/[aprofile jdjOoutput = jsonregion = eu-central-1'
+" When completing by tag, show the whole tag, not just the function name
+set showfulltag
+" get rid of the silly characters in separators
+set fillchars = ""
 
+" Automatically read a file that has changed on disk
+set autoread
 
-command Md2tei call Md2tei()
-function Md2tei()
-
-    " paragraph wrapping
-    g/^\w/normal vapkS<p>
-
-    " establish helper hash for proper nesting
-    normal Go# 
-    " section nesting
-    g/^#\{4}\s/normal V/^#\{1,4}\skS<div>
-    g/^#\{3}\s/normal V/^#\{1,3}\skS<div>
-    g/^#\{2}\s/normal V/^#\{1,2}\skS<div>
-    " remove helper hash
-    normal G dd
-
-    " generate internal link targets
-    " this can be overly complicated
-    " as I had confusing binding conflicts
-    g/##/normal nwy$O0C@@midstep@@"0pVu
-    g/@@midstep@@/s/\s/-/g
-    g/@@midstep@@/normal 0i<div xml:id="kddA">
-    %s/@@midstep@@//
-    " wrap section titles
-    %s/#\{2,5}\s\+\(.\+\)/<head>\1<\/head>
-
-    " title, yanked into "t
-    normal gg/^#\sxx"ty$yss<head>
-    normal 0V/<divkS<div>
-
-    normal nO</front><body>
-    normal Go</body>
-    normal gg/<divO<front>
-    "normal ggO<front>
-
-    set filetype=xml
-    " reformat
-    normal gg v G =
-
-    " highlights - warning, misses line-spanning ones
-    %s/\*\*\([^*]\+\)\*\*/<hi rend="HINT">\1<\/hi>/g
-    %s/\*\([^*]\+\)\*/<hi>\1<\/hi>/g
-
-    " internal links - warning as above, + spaces in targets
-    %s/_\([^_]\+\)_/<ptr target="#\L\1\E"\/>/g
-
-endfunction
-
-command TeiWrap call TeiWrap()
-function TeiWrap()
-    normal gg
-    read doc/xmlstub.xml
-    normal Go</text></TEI>
-    normal gg v G =
-endfunction
+" Toggle paste mode
+nmap <silent><leader>p :set invpaste<CR>:set paste?<CR>
+"(...)
+" Underline the current line with '='
+nmap <silent><leader>ul :t.\|s/./=/g\|:nohls<cr>
+" Shrink the current window to fit the number of lines in the buffer. Useful
+" for those buffers that are only a few lines
+nmap <silent><leader>sw :execute ":resize " . line('$')<cr>
+" Use the bufkill plugin to eliminate a buffer but keep the window layout
+nmap <leader>bd :BD<cr>
+" Alright... let's try this out
+imap jj <esc>
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=2048
 
 " disable MiniBufExpl
 let loaded_minibufexplorer = 1
@@ -211,6 +236,79 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " https://github.com/scrooloose/vimfiles/blob/master/vimrc
 set formatoptions-=o "dont continue comments when pushing o/O
+
+
+
+
+
+" ## Custom stuff from ~2011
+
+" Macros
+" django model->modelAdmin. start line above
+let @c='j0Oojwvt(yf(iAdminllcwadminf)iAdminopassadmin.site.register(mls."0pa, "0paAdmin)'
+" awscli space separated -> credentials + config
+let @r='0dt.r[Ea]ld2wiaws_access_key_id = Eldwiaws_secret_access_key = oj'
+let @o='/[aprofile jdjOoutput = jsonregion = eu-central-1'
+
+
+command Md2tei call Md2tei()
+function Md2tei()
+
+    " paragraph wrapping
+    g/^\w/normal vapkS<p>
+
+    " establish helper hash for proper nesting
+    normal Go# 
+    " section nesting
+    g/^#\{4}\s/normal V/^#\{1,4}\skS<div>
+    g/^#\{3}\s/normal V/^#\{1,3}\skS<div>
+    g/^#\{2}\s/normal V/^#\{1,2}\skS<div>
+    " remove helper hash
+    normal G dd
+
+    " generate internal link targets
+    " this can be overly complicated
+    " as I had confusing binding conflicts
+    g/##/normal nwy$O0C@@midstep@@"0pVu
+    g/@@midstep@@/s/\s/-/g
+    g/@@midstep@@/normal 0i<div xml:id="kddA">
+    %s/@@midstep@@//
+    " wrap section titles
+    %s/#\{2,5}\s\+\(.\+\)/<head>\1<\/head>
+
+    " title, yanked into "t
+    normal gg/^#\sxx"ty$yss<head>
+    normal 0V/<divkS<div>
+
+    normal nO</front><body>
+    normal Go</body>
+    normal gg/<divO<front>
+    "normal ggO<front>
+
+    set filetype=xml
+    " reformat
+    normal gg v G =
+
+    " highlights - warning, misses line-spanning ones
+    %s/\*\*\([^*]\+\)\*\*/<hi rend="HINT">\1<\/hi>/g
+    %s/\*\([^*]\+\)\*/<hi>\1<\/hi>/g
+
+    " internal links - warning as above, + spaces in targets
+    %s/_\([^_]\+\)_/<ptr target="#\L\1\E"\/>/g
+
+endfunction
+
+command TeiWrap call TeiWrap()
+function TeiWrap()
+    normal gg
+    read doc/xmlstub.xml
+    normal Go</text></TEI>
+    normal gg v G =
+endfunction
+
+
+
+
 "statusline setup
 set statusline=%f "tail of the filename
 
@@ -372,78 +470,4 @@ function! s:Median(nums)
         return (nums[l/2] + nums[(l/2)-1]) / 2
     endif
 endfunction
-
-"syntastic settings
-"let g:syntastic_enable_signs=0 "takes pre columns
-"let g:syntastic_auto_loc_list=2
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" Python 3.newer
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-"let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
-let g:syntastic_python_pyflakes_exe = '~/.local/bin/pyflakes'
-let g:syntastic_python_flake8_exe = '~/.local/bin/flake8'
-let g:syntastic_python_checkers = ['flake8']
-
-"clear the highlight as well as redraw
-nnoremap <leader>n :nohls<CR><C-L>
-"make Y consistent with C and D
-nnoremap Y y$
-"spell check when writing commit logs
-autocmd filetype svn,*commit* setlocal spell
-"http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
-"hacks from above (the url, not jesus) to delete fugitive buffers when we
-"leave them - otherwise the buffer list gets poluted
-"add a mapping on .. to view parent tree
-autocmd BufReadPost fugitive://* set bufhidden=delete
-autocmd BufReadPost fugitive://*
-  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-  \ nnoremap <buffer> .. :edit %:h<CR> |
-  \ endif
-
-" https://github.com/derekwyatt/vim-config/
-" Printing options
-set printoptions=header:0,duplex:long,paper:a4
-" set the forward slash to be the slash of note. Backslashes suck
-set shellslash
-if has("unix")
-    set shell=bash
-else
-    set shell=ksh.exe
-endif
-" Make command line two lines high
-set ch=2
-" Allow backspacing over indent, eol, and the start of an insert
-set backspace=2
-" Make the 'cw' u like commands put a $ at the end instead of just deleting
-" the text and replacing it
-set cpoptions+=$
-" Set up the gui cursor to look nice
-"set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-
-" When completing by tag, show the whole tag, not just the function name
-set showfulltag
-" get rid of the silly characters in separators
-set fillchars = ""
-
-" Automatically read a file that has changed on disk
-set autoread
-
-" Toggle paste mode
-nmap <silent><leader>p :set invpaste<CR>:set paste?<CR>
-"(...)
-" Underline the current line with '='
-nmap <silent><leader>ul :t.\|s/./=/g\|:nohls<cr>
-" Shrink the current window to fit the number of lines in the buffer. Useful
-" for those buffers that are only a few lines
-nmap <silent><leader>sw :execute ":resize " . line('$')<cr>
-" Use the bufkill plugin to eliminate a buffer but keep the window layout
-nmap <leader>bd :BD<cr>
-" Alright... let's try this out
-imap jj <esc>
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=2048
-
 

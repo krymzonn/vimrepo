@@ -1,75 +1,75 @@
 [submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
+	path = vim/old/bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/snipmate"]
-	path = vim/bundle/snipmate
+	path = vim/old/bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
 [submodule "vim/bundle/surround"]
-	path = vim/bundle/surround
+	path = vim/old/bundle/surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/git"]
-	path = vim/bundle/git
+	path = vim/old/bundle/git
 	url = https://github.com/tpope/vim-git.git
 [submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
+	path = vim/old/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
 #[submodule "vim/bundle/minibufexpl"]
 #	path = vim/bundle/minibufexpl
 #	url = https://github.com/fholgado/minibufexpl.vim.git
 [submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
+	path = vim/old/bundle/command-t
 	url = https://github.com/wincent/Command-T.git
 [submodule "vim/bundle/ack"]
-	path = vim/bundle/ack
+	path = vim/old/bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/gundo"]
-	path = vim/bundle/gundo
+	path = vim/old/bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
 [submodule "vim/bundle/pydoc"]
-	path = vim/bundle/pydoc
+	path = vim/old/bundle/pydoc
 	url = https://github.com/fs111/pydoc.vim.git
 [submodule "vim/bundle/py.test"]
-	path = vim/bundle/py.test
+	path = vim/old/bundle/py.test
 	url = https://github.com/alfredodeza/pytest.vim.git
 [submodule "vim/bundle/makegreen"]
-	path = vim/bundle/makegreen
+	path = vim/old/bundle/makegreen
 	url = https://github.com/reinh/vim-makegreen
 [submodule "vim/bundle/tasklist"]
-	path = vim/bundle/tasklist
+	path = vim/old/bundle/tasklist
 	url = https://github.com/vim-scripts/TaskList.vim.git
 [submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
+	path = vim/old/bundle/nerdtree
 	url = https://github.com/vim-scripts/The-NERD-tree.git
 #[submodule "vim/bundle/ropevim"]
 #	path = vim/bundle/ropevim
 #	url = https://github.com/python-rope/ropevim.git
 [submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
+	path = vim/old/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic/
 [submodule "vim/bundle/bufkill"]
-	path = vim/bundle/bufkill
+	path = vim/old/bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim
 [submodule "vim/bundle/ikiwiki"]
-	path = vim/bundle/ikiwiki
+	path = vim/old/bundle/ikiwiki
 	url = http://git.devnull.li/ikiwiki-syntax.git
 [submodule "vim/bundle/pep8"]
-	path = vim/bundle/pep8
+	path = vim/old/bundle/pep8
 	url = git://github.com/vim-scripts/pep8.git
 [submodule "vim/bundle/ropevim"]
-	path = vim/bundle/ropevim
+	path = vim/old/bundle/ropevim
 	url = https://github.com/python-rope/ropevim.git
 [submodule "vim/bundle/vim-terraform"]
-	path = vim/bundle/vim-terraform
+	path = vim/old/bundle/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
 [submodule "vim/bundle/rsi"]
-	path = vim/bundle/rsi
+	path = vim/old/bundle/rsi
 	url = https://github.com/tpope/vim-rsi.git
 [submodule "vim/bundle/commentary"]
-	path = vim/bundle/commentary
+	path = vim/old/bundle/commentary
 	url = git://github.com/tpope/vim-commentary.git
 [submodule "vim/bundle/splitjoin.vim"]
-	path = vim/bundle/splitjoin.vim
+	path = vim/old/bundle/splitjoin.vim
 	url = https://github.com/AndrewRadev/splitjoin.vim.git
 [submodule "vim/bundle/puppet"]
-	path = vim/bundle/puppet
+	path = vim/old/bundle/puppet
 	url = https://github.com/rodjek/vim-puppet.git
