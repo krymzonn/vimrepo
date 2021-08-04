@@ -38,9 +38,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " Python 3.newer
 let g:syntastic_python_python_exec = '/usr/bin/python3'
-"let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
-let g:syntastic_python_pyflakes_exe = '~/.local/bin/pyflakes'
-let g:syntastic_python_flake8_exe = '~/.local/bin/flake8'
 let g:syntastic_python_checkers = ['flake8']
 
 "clear the highlight as well as redraw
@@ -48,9 +45,9 @@ nnoremap <leader>n :nohls<CR><C-L>
 "make Y consistent with C and D
 nnoremap Y y$
 "spell check when writing commit logs
-autocmd filetype svn,*commit* setlocal spell
+autocmd filetype svn,*commit*,markdown setlocal spell
 "http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
-"hacks from above (the url, not jesus) to delete fugitive buffers when we
+"hacks from above to delete fugitive buffers when we
 "leave them - otherwise the buffer list gets poluted
 "add a mapping on .. to view parent tree
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -75,7 +72,7 @@ set cpoptions+=$
 
 " When completing by tag, show the whole tag, not just the function name
 set showfulltag
-" get rid of the silly characters in separators
+" blank window separators
 set fillchars = ""
 
 
@@ -98,10 +95,11 @@ set synmaxcol=2048
 set showmode
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
+set ignorecase          " Apparently these 2 go together
 set smartcase           " Do smart case matching
-set incsearch           " Incremental search
-"set autowrite           " Automatically save before commands like :next and :make
+set hlsearch
 set hidden             " Hide buffers when they are abandoned
+"set autowrite           " Automatically save before commands like :next and :make
 
 "set guioptions-=TmrL
 "set guioptions = agit
@@ -139,7 +137,6 @@ nnoremap ` '
 let mapleader = " "
 set history=1000
 runtime macros/matchit.vim "runtime like source rel to the Vim installation dir
-set wildmenu
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp "swap files
 " From http://stripey.com/vim/vimrc.html
@@ -147,20 +144,17 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp "swap files
 " names)
 " first list the available options and complete the longest common part, then
 " have further <Tab>s cycle through the possibilities:
+set wildmenu
 set wildmode=list:longest,full
 set wildignore=*.o,*.obj,*~,*.pyc "stuff to ignore when tab completing
 
-"set ignorecase
-set smartcase
 set title
 set scrolloff=5
 set ruler
-set hlsearch
-set incsearch
 
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-nmap <silent> <leader>s :set nolist!<CR> "show white with " s"
+nmap <silent> <leader>s :set nolist!<CR> "show white with ' 's
 
 
 "cont from http://sontek.net/turning-vim-into-a-modern-python-ide
@@ -181,36 +175,23 @@ map <leader>g :GundoToggle<CR>
 "au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
-" NerdTree
-map <leader>nerd :NERDTreeToggle<CR>
-" Rope
-map <leader>roj :RopeGotoDefinition<CR>
-map <leader>ror :RopeRename<CR>
-" more rope
-let ropevim_vim_completion=1
-let ropevim_extended_complete=1
-autocmd FileType python setlocal omnifunc=RopeCompleteFunc
-" autoclose the PyDoc from omnicompletion
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " Ack
 nmap <leader>a <Esc>:Ack!
-" MakeGreen
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
-" py.test
-" Execute the tests
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-" cycle through test errors
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
-"currently no config for virtualenv
+"" py.test
+"" Execute the tests
+"nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+"nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+"nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+"" cycle through test errors
+"nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+"nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+"nmap <silent><Leader>te <Esc>:Pytest error<CR>
+""currently no config for virtualenv
 
-" http://blog.fluther.com/django-vim/
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"" http://blog.fluther.com/django-vim/
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " https://github.com/scrooloose/vimfiles/blob/master/vimrc
 set formatoptions-=o "dont continue comments when pushing o/O
