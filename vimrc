@@ -1,39 +1,30 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/tpope/vim-sensible'
-" Indents
-Plug 'https://github.com/tpope/vim-sleuth'
+Plug 'mileszs/ack.vim' "grep
+Plug 'qpkorr/vim-bufkill' "windows stays open
+Plug 'tpope/vim-fugitive' "git
+Plug 'tpope/vim-rhubarb' "github
+Plug 'tpope/vim-surround' "parentheses
+Plug 'tpope/vim-sensible' "base config
+Plug 'tpope/vim-sleuth' "indents
+Plug 'tpope/vim-commentary' "comment out
+Plug 'sjl/gundo.vim' "visual undo history
+Plug 'AndrewRadev/splitjoin.vim' "multiline statements
+Plug 'vim-syntastic/syntastic' "lint
 
-
-" Previously installed
-Plug 'https://github.com/mileszs/ack.vim.git'
-Plug 'https://github.com/qpkorr/vim-bufkill.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/wincent/Command-T.git'
-Plug 'sjl/gundo.vim'
-Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'tpope/vim-rhubarb'
-Plug 'AndrewRadev/splitjoin.vim'
-
+Plug 'wincent/Command-T' "fuzzy navigation
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 call plug#end()
 
 
-#set nocompatible
-#filetype off
-#call pathogen#runtime_append_all_bundles()
-#call pathogen#helptags()
-
 " GNU screen apparently needs this for colours
 set t_Co=256
 
-#syntax on
 set background=dark
 colorscheme kimiko
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+" Jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
@@ -73,15 +64,9 @@ autocmd BufReadPost fugitive://*
 set printoptions=header:0,duplex:long,paper:a4
 " set the forward slash to be the slash of note. Backslashes suck
 set shellslash
-if has("unix")
-    set shell=bash
-else
-    set shell=ksh.exe
-endif
+
 " Make command line two lines high
 set ch=2
-" Allow backspacing over indent, eol, and the start of an insert
-set backspace=2
 " Make the 'cw' u like commands put a $ at the end instead of just deleting
 " the text and replacing it
 set cpoptions+=$
@@ -93,8 +78,6 @@ set showfulltag
 " get rid of the silly characters in separators
 set fillchars = ""
 
-" Automatically read a file that has changed on disk
-set autoread
 
 " Toggle paste mode
 nmap <silent><leader>p :set invpaste<CR>:set paste?<CR>
@@ -111,15 +94,10 @@ imap jj <esc>
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
 
-" disable MiniBufExpl
-let loaded_minibufexplorer = 1
-
-"set virtualedit=all
 
 set showmode
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
-set ignorecase          " Do case insensitive matching
 set smartcase           " Do smart case matching
 set incsearch           " Incremental search
 "set autowrite           " Automatically save before commands like :next and :make
@@ -127,32 +105,32 @@ set hidden             " Hide buffers when they are abandoned
 
 "set guioptions-=TmrL
 "set guioptions = agit
-set guioptions = ai
+" set guioptions = ai
 
 " Markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+"autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'sh', 'yaml']
 let g:markdown_minlines = 100
 
-"   ===  Python  ===
-" some from http://www.vex.net/~x/python_and_vim.html
-"set textwidth=80
-set expandtab
-set tabstop=8
-set softtabstop=4
-set smarttab
-set shiftwidth=4
-set autoindent
-let python_highlight_all = 1 " mainly space_error
-"Trim Trailing Whitespace
-"doesn't work?
-"autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-
-if has("autocmd")
-  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-endif
+""   ===  Python  ===
+"" some from http://www.vex.net/~x/python_and_vim.html
+""set textwidth=80
+"set expandtab
+"set tabstop=8
+"set softtabstop=4
+"set smarttab
+"set shiftwidth=4
+"set autoindent
+"let python_highlight_all = 1 " mainly space_error
+""Trim Trailing Whitespace
+""doesn't work?
+""autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+"
+"if has("autocmd")
+"  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+"  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"endif
 
 
 "http://items.sjbach.com/319/configuring-vim-right
@@ -195,9 +173,9 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-map <leader>td <Plug>TaskList
+"map <leader>td <Plug>TaskList
 map <leader>g :GundoToggle<CR>
-let g:pep8_map='<leader>8'
+"let g:pep8_map='<leader>8'
 " SuperTab
 "set omnifunc=syntaxcomplete#Complete
 "au FileType python set omnifunc=pythoncomplete#Complete
