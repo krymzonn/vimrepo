@@ -11,6 +11,7 @@ Plug 'tpope/vim-commentary' "comment out
 Plug 'sjl/gundo.vim' "visual undo history
 Plug 'AndrewRadev/splitjoin.vim' "multiline statements
 Plug 'vim-syntastic/syntastic' "lint
+Plug 'hashivim/vim-terraform'
 
 Plug 'wincent/Command-T' "fuzzy navigation
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -134,9 +135,15 @@ let g:markdown_minlines = 100
 "http://items.sjbach.com/319/configuring-vim-right
 nnoremap ' `
 nnoremap ` '
-let mapleader = " "
+"nnoremap <SPACE> <Nop>
+"let mapleader = " "
+"the above broke mysteriously
+let mapleader="\\"
+map <Space> <Leader>
+
 set history=1000
-runtime macros/matchit.vim "runtime like source rel to the Vim installation dir
+" runtime like source rel to the Vim installation dir
+runtime macros/matchit.vim
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp "swap files
 " From http://stripey.com/vim/vimrc.html
@@ -146,22 +153,24 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp "swap files
 " have further <Tab>s cycle through the possibilities:
 set wildmenu
 set wildmode=list:longest,full
-set wildignore=*.o,*.obj,*~,*.pyc "stuff to ignore when tab completing
+"stuff to ignore when tab completing
+set wildignore=*.o,*.obj,*~,*.pyc
 
 set title
 set scrolloff=5
 set ruler
 
+" whitespace display
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-nmap <silent> <leader>s :set nolist!<CR> "show white with ' 's
+nmap <silent><leader>s :set nolist!<CR>
 
 
-"cont from http://sontek.net/turning-vim-into-a-modern-python-ide
+" cont from http://sontek.net/turning-vim-into-a-modern-python-ide
 set foldmethod=indent
 set foldlevel=99
 
-"window movement
+" window movement
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
@@ -171,7 +180,7 @@ map <c-h> <c-w>h
 map <leader>g :GundoToggle<CR>
 "let g:pep8_map='<leader>8'
 " SuperTab
-"set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 "au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
@@ -313,7 +322,7 @@ set statusline+=%*
 
 set statusline+=%= "left/right separator
 "set statusline+=%#Comment#
-set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+set statusline+=%{StatuslineCurrentHighlight()}\ \
 "set statusline+=%*
 set statusline+=%c, "cursor column
 set statusline+=%l/%L "cursor line/total lines
@@ -323,7 +332,8 @@ set laststatus=2
 if v:version >= 703
     set undodir=~/tmp/undofiles
     set undofile
-    set colorcolumn=+1 "mark the ideal max text width
+    " mark the ideal max text width
+    set colorcolumn=+1
 endif
 
 "recalculate the trailing whitespace warning when idle, and after saving
@@ -379,7 +389,7 @@ function! StatuslineTabWarning()
 endfunction
 "recalculate the long line warning when idle and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
-"return a warning for "long lines" where "long" is either &textwidth or 80 (if
+"return a warning for long lines where long is either &textwidth or 80 (if
 "no &textwidth is set)
 "return '' if no long lines
 "return '[#x,my,$z] if long lines are found, were x is the number of long
