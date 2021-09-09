@@ -40,9 +40,8 @@ let g:syntastic_check_on_wq = 0
 " Python 3.newer
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_markdown_mdl_args = "-r ~MD003,~MD033"
 
-"clear the highlight as well as redraw
-nnoremap <leader>n :nohls<CR><C-L>
 "make Y consistent with C and D
 nnoremap Y y$
 "spell check when writing commit logs
@@ -75,20 +74,6 @@ set cpoptions+=$
 set showfulltag
 " blank window separators
 set fillchars = ""
-
-
-" Toggle paste mode
-nmap <silent><leader>p :set invpaste<CR>:set paste?<CR>
-"(...)
-" Underline the current line with '='
-nmap <silent><leader>ul :t.\|s/./=/g\|:nohls<cr>
-" Shrink the current window to fit the number of lines in the buffer. Useful
-" for those buffers that are only a few lines
-nmap <silent><leader>sw :execute ":resize " . line('$')<cr>
-" Use the bufkill plugin to eliminate a buffer but keep the window layout
-nmap <leader>bd :BD<cr>
-" Alright... let's try this out
-imap jj <esc>
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
 
@@ -105,6 +90,24 @@ set hidden             " Hide buffers when they are abandoned
 "set guioptions-=TmrL
 "set guioptions = agit
 " set guioptions = ai
+
+"  === Mappings ===
+" Toggle paste mode
+nmap <silent><leader>p :set invpaste<CR>:set paste?<CR>
+" clear the highlight as well as redraw
+nnoremap <leader>n :nohls<CR><C-L>
+" Underline the current line with '='
+nmap <silent><leader>ul :t.\|s/./=/g\|:nohls<cr>
+" Shrink the current window to fit the number of lines in the buffer
+nmap <silent><leader>sw :execute ":resize " . line('$')<cr>
+" Use the bufkill plugin to eliminate a buffer but keep the window layout
+nmap <leader>bd :BD<cr>
+" Leave Insert mode with jj
+imap jj <esc>
+" Terraform
+nmap <leader>tf :Terraform<cr>
+nmap <leader>tff :TerraformFmt<cr>
+let g:terraform_fmt_on_save = 1
 
 " Markdown
 "autocmd BufNewFile,BufReadPost *.md set filetype=markdown
