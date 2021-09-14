@@ -40,12 +40,18 @@ let g:syntastic_check_on_wq = 0
 " Python 3.newer
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_markdown_mdl_args = "-r ~MD003,~MD033"
+let g:syntastic_markdown_mdl_args = "-r ~MD003,~MD004,~MD033"
 
 "make Y consistent with C and D
 nnoremap Y y$
+
+" slide switch
+"nnoremap <expr> <right> (len(filter(range(0, bufnr('$')), 'buflisted(v:val)')) > 1 ? ":bn\<cr>" : "\<right>")
+"nnoremap <expr> <left> (len(filter(range(0, bufnr('$')), 'buflisted(v:val)')) > 1 ? ":bp\<cr>" : "\<left>")
+
 "spell check when writing commit logs
 autocmd filetype svn,*commit*,markdown setlocal spell
+
 "http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 "hacks from above to delete fugitive buffers when we
 "leave them - otherwise the buffer list gets poluted
